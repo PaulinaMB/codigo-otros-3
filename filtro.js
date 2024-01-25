@@ -8,35 +8,35 @@ const productos = [
   {nombre: "Zapato rojo", tipo: "zapato", color: "rojo", img: "./zapato-rojo.jpg"}
 ]
 
-const li = document.getElementsByName("lista-de-productos")
-const $i = document.querySelector('.input');
+const li = document.getElementById('lista-de-productos'); //Debido a que obtiene el elemento por id y no por nombre
+const textoIngresado = document.querySelector('.input'); //se renombró la variable $i por textoIngresado para facilitar la lectura del código
 
 for (let i = 0; i < productos.length; i++) {
-  var d = document.createElement("div")
-  d.classList.add("producto")
+  var d = document.createElement("div");
+  d.classList.add("producto");
 
-  var ti = document.createElement("p")
-  ti.classList.add("titulo")
-  ti.textContent = productos[i].nombre
+  var ti = document.createElement("p");
+  ti.classList.add("titulo");
+  ti.textContent = productos[i].nombre;
   
   var imagen = document.createElement("img");
   imagen.setAttribute('src', productos[i].img);
 
-  d.appendChild(ti)
-  d.appendChild(imagen)
+  d.appendChild(ti); //Se puso ;
+  d.appendChild(imagen); //Se puso ; por buena práctica
 
-  li.appendChild(d)
+  li.appendChild(d); //Se puso ;
 }
 
-displayProductos(productos)
-const botonDeFiltro = document.querySelector("button");
+//displayProductos(productos); Esta función no se utiliza en el código
+const botonDeFiltro = document.querySelector("button"); 
 
-botonDeFiltro.onclick = function() {
+botonDeFiltro.addEventListener('click', function() { //Se cambió el evento onclick a addEventListener
   while (li.firstChild) {
     li.removeChild(li.firstChild);
   }
 
-  const texto = $i.value;
+  const texto = textoIngresado.value;
   console.log(texto);
   const productosFiltrados = filtrado(productos, texto );
 
@@ -56,7 +56,7 @@ botonDeFiltro.onclick = function() {
   
     li.appendChild(d)
   }
-}
+});
 
 const filtrado = (productos = [], texto) => {
   return productos.filter(item => item.tipo.includes(texto) || item.color.includes(texto));
